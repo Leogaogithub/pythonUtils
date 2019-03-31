@@ -14,6 +14,7 @@ class AmazonScraper:
             sleep(3)
             try:
                 doc = html.fromstring(page.content)
+                # https://www.w3schools.com/xml/xpath_syntax.asp
                 XPATH_NAME = '//h1[@id="title"]//text()'
                 XPATH_SALE_PRICE = '//span[contains(@id,"ourprice") or contains(@id,"saleprice")]/text()'
                 XPATH_ORIGINAL_PRICE = '//td[contains(text(),"List Price") or contains(text(),"M.R.P") or contains(text(),"Price")]/following-sibling::td/text()'
@@ -57,7 +58,7 @@ class AmazonScraper:
             print "Processing: " + Asin
             extracted_data.append(self.AmzonParser(Asin))
             sleep(5)
-        f = open('data.json', 'w')
+        f = open('./data/data.json', 'w')
         json.dump(extracted_data, f, indent=4)
 
 if __name__ == "__main__":
